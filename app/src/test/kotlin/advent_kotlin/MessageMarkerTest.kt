@@ -33,9 +33,9 @@ class MessageMarkerTest {
         val message5 = "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw"
         val markerLength = 14
 
-        // When + Then
-        assertEquals(getMarkerIndex(message1, markerLength), 19)
-        assertEquals(getMarkerIndex(message2, markerLength), 23)
+            // When + Then
+            assertEquals(getMarkerIndex(message1, markerLength), 19)
+            assertEquals(getMarkerIndex(message2, markerLength), 23)
         assertEquals(getMarkerIndex(message3, markerLength), 23)
         assertEquals(getMarkerIndex(message4, markerLength), 29)
         assertEquals(getMarkerIndex(message5, markerLength), 26)

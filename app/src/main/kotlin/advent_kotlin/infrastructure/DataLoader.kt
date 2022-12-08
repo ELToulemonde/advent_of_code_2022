@@ -134,6 +134,15 @@ class DataLoader constructor(private val fileName: String) {
         return CratesStacks(cratesStackList)
 
     }
+
+    fun readForest(): Forest {
+        val forest = mutableListOf<List<Int>>()
+        File(fileName).forEachLine { line ->
+            val elements = line.chunked(1).map { it.toInt() }
+            forest.add(elements)
+        }
+        return Forest(forest)
+    }
 }
 
 fun buildSectionFromString(sectionString: String) =

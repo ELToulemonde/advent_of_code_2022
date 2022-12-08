@@ -87,10 +87,16 @@ fun main() {
     println("Day 6 part 1 : " + getMarkerIndex(message, 4).toString())
     println("Day 6 part 2 : " + getMarkerIndex(message, 14).toString())
 
+    // Day 7
+    val dataLoader7 = DataLoader("data/day7.txt")
+    val fileSystem = dataLoader7.readFileSystem()
+    println("Day 7 part 1 : " + fileSystem.sumOfSizeOfAllFoldersWithLowerSizeThan(100000))
+    val spaceToFree = fileSystem.getSpaceToFree(30000000, 70000000)
+    println("Day 7 part 2 : " + fileSystem.getMinFolderSizeToDelete(spaceToFree))
+
     // Day 8
     val dataLoader8 = DataLoader("data/day8.txt")
     val forest = dataLoader8.readForest()
     println("Day 8 part 1 : " + forest.numberOfVisibleTrees())
     println("Day 8 part 2 : " + forest.maxScenicScore())
 }
-

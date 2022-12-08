@@ -135,6 +135,41 @@ class DataLoader constructor(private val fileName: String) {
 
     }
 
+    fun readFileSystem(): Folder {
+        val folder = Folder(mutableListOf(), mutableListOf(), "/")
+        var currentFolderName = "/"
+        var totalSize = 0
+        File(fileName).forEachLine { line ->
+            // println(line)
+            if ("$ cd" in line && ".." !in line) {
+                if ("/" !in line){
+                    currentFolderName += line.subSequence(5, line.length).toString() + "/"
+                    // println("Moving into " + currentFolderName)
+                }
+            }
+            if ("dir " in line) {
+                val newFolderName = currentFolderName + line.subSequence(4, line.length).toString() + "/"
+                // println("Creating " + newFolderName + " in "+ currentFolderName)
+                folder.getFolder(currentFolderName)
+                    .addSubFolder(Folder(mutableListOf(), mutableListOf(), newFolderName))
+            }
+            if (line[0] in "1234567890") {
+                val fileName = line.split(" ")[1]
+                val fileSize = line.split(" ")[0].toInt()
+                totalSize += fileSize
+                // println("Creating file " + fileName + " of size " + fileSize + " in " + currentFolderName)
+                folder.getFolder(currentFolderName).addFile(File(currentFolderName + fileName, fileSize))
+            }
+            if (".." in line) {
+                val allFolder = currentFolderName.split("/")
+                currentFolderName = java.lang.String.join("/", allFolder.subList(0, allFolder.size -2)) + "/"
+                // println("Mooving back into " + currentFolderName)
+            }
+        }
+        println("Total file size " + totalSize)
+        return folder
+    }
+
     fun readForest(): Forest {
         val forest = mutableListOf<List<Int>>()
         File(fileName).forEachLine { line ->

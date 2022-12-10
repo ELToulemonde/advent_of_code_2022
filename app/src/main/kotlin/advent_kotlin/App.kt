@@ -99,4 +99,20 @@ fun main() {
     val forest = dataLoader8.readForest()
     println("Day 8 part 1 : " + forest.numberOfVisibleTrees())
     println("Day 8 part 2 : " + forest.maxScenicScore())
+
+    // Day 10
+    val dataLoader10 = DataLoader("data/day10.txt")
+    val communicationSystem = dataLoader10.readCommunicationSystem()
+    val result = 20 * communicationSystem.getSignalAtCycle(20) +
+            60 * communicationSystem.getSignalAtCycle(60) +
+            100 * communicationSystem.getSignalAtCycle(100) +
+            140 * communicationSystem.getSignalAtCycle(140) +
+            180 * communicationSystem.getSignalAtCycle(180) +
+            220 * communicationSystem.getSignalAtCycle(220)
+    println("Day 10 part 1 : " + result)
+    val screen = communicationSystem.draw()
+    println("Day 10 part 2 : ")
+    screen.forEach{
+        println(it)
+    }
 }

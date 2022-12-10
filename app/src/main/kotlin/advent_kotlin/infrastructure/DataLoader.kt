@@ -1,5 +1,6 @@
 package advent_kotlin.infrastructure
 
+import CommunicationSystem
 import advent_kotlin.domain.*
 import java.io.File
 
@@ -142,7 +143,7 @@ class DataLoader constructor(private val fileName: String) {
         File(fileName).forEachLine { line ->
             // println(line)
             if ("$ cd" in line && ".." !in line) {
-                if ("/" !in line){
+                if ("/" !in line) {
                     currentFolderName += line.subSequence(5, line.length).toString() + "/"
                     // println("Moving into " + currentFolderName)
                 }
@@ -162,7 +163,7 @@ class DataLoader constructor(private val fileName: String) {
             }
             if (".." in line) {
                 val allFolder = currentFolderName.split("/")
-                currentFolderName = java.lang.String.join("/", allFolder.subList(0, allFolder.size -2)) + "/"
+                currentFolderName = java.lang.String.join("/", allFolder.subList(0, allFolder.size - 2)) + "/"
                 // println("Mooving back into " + currentFolderName)
             }
         }
@@ -177,6 +178,14 @@ class DataLoader constructor(private val fileName: String) {
             forest.add(elements)
         }
         return Forest(forest)
+    }
+
+    fun readCommunicationSystem(): CommunicationSystem {
+        val instructions = mutableListOf<String>()
+        File(fileName).forEachLine {
+            instructions.add(it)
+        }
+        return CommunicationSystem(instructions)
     }
 }
 

@@ -1,9 +1,6 @@
 package advent_kotlin
 
-import advent_kotlin.domain.ElfGroup
-import advent_kotlin.domain.Strategy
-import advent_kotlin.domain.getLetterPriority
-import advent_kotlin.domain.getMarkerIndex
+import advent_kotlin.domain.*
 import advent_kotlin.infrastructure.DataLoader
 
 
@@ -99,6 +96,16 @@ fun main() {
     val forest = dataLoader8.readForest()
     println("Day 8 part 1 : " + forest.numberOfVisibleTrees())
     println("Day 8 part 2 : " + forest.maxScenicScore())
+
+    // Day 9
+    val dataLoader9 = DataLoader("data/day9.txt")
+    val ropeBridge = RopeBridge(mutableListOf(Pair(0, 0), Pair(0, 0)))
+    val ropeMoves = dataLoader9.readRopeMoves()
+    ropeBridge.applyMoves(ropeMoves)
+    println("Day 9 part 1 : " + ropeBridge.numberOfUniqueTailPosition())
+    val ropeBridge2 = RopeBridge(mutableListOf(Pair(0, 0), Pair(0, 0), Pair(0, 0), Pair(0, 0), Pair(0, 0), Pair(0, 0), Pair(0, 0), Pair(0, 0), Pair(0, 0), Pair(0, 0)))
+    ropeBridge2.applyMoves(ropeMoves)
+    println("Day 9 part 2 : " + ropeBridge2.numberOfUniqueTailPosition())
 
     // Day 10
     val dataLoader10 = DataLoader("data/day10.txt")

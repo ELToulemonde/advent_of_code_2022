@@ -180,6 +180,14 @@ class DataLoader constructor(private val fileName: String) {
         return Forest(forest)
     }
 
+    fun readRopeMoves(): List<String> {
+        val moves = mutableListOf<String>()
+        File(fileName).forEachLine { line ->
+            moves.add(line)
+        }
+        return moves
+    }
+
     fun readCommunicationSystem(): CommunicationSystem {
         val instructions = mutableListOf<String>()
         File(fileName).forEachLine {

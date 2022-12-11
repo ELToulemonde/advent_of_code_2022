@@ -195,6 +195,42 @@ class DataLoader constructor(private val fileName: String) {
         }
         return CommunicationSystem(instructions)
     }
+
+    fun readMonkeys(): Monkeys {
+        val monkeyList = mutableListOf<Monkey>()
+        var startingItems = listOf<Int>()
+        var operation = ""
+        var test = 0
+        var targetTrue = 0
+        var targetFalse = 0
+        File(fileName).forEachLine { line ->
+            if ("Monkey :" in line) {
+                startingItems = listOf()
+            }
+            if ("Starting items:" in line) {
+                startingItems =
+                    line.subSequence("  Starting items: ".length, line.length).split(", ").map { it.toInt() }
+            }
+            if ("Operation: " in line) {
+                operation = line
+            }
+            if ("Test: divisible by " in line) {
+                test = line.subSequence("  Test: divisible by ".length, line.length).toString().toInt()
+            }
+            if ("    If true: throw to monkey " in line) {
+                targetTrue = line.subSequence("    If true: throw to monkey ".length, line.length).toString().toInt()
+            }
+            if ("If false: throw to monkey" in line) {
+                targetFalse = line.subSequence("    If false: throw to monkey ".length, line.length).toString().toInt()
+            }
+            if (line == "") {
+                monkeyList.add(Monkey(startingItems.map {it.toBigInteger()}.toMutableList(), operation, test.toBigInteger(), targetTrue, targetFalse))
+            }
+
+        }
+        monkeyList.add(Monkey(startingItems.map {it.toBigInteger()}.toMutableList(), operation, test.toBigInteger(), targetTrue, targetFalse))
+        return Monkeys(monkeyList)
+    }
 }
 
 fun buildSectionFromString(sectionString: String) =

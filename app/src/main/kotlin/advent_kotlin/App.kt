@@ -103,7 +103,20 @@ fun main() {
     val ropeMoves = dataLoader9.readRopeMoves()
     ropeBridge.applyMoves(ropeMoves)
     println("Day 9 part 1 : " + ropeBridge.numberOfUniqueTailPosition())
-    val ropeBridge2 = RopeBridge(mutableListOf(Pair(0, 0), Pair(0, 0), Pair(0, 0), Pair(0, 0), Pair(0, 0), Pair(0, 0), Pair(0, 0), Pair(0, 0), Pair(0, 0), Pair(0, 0)))
+    val ropeBridge2 = RopeBridge(
+        mutableListOf(
+            Pair(0, 0),
+            Pair(0, 0),
+            Pair(0, 0),
+            Pair(0, 0),
+            Pair(0, 0),
+            Pair(0, 0),
+            Pair(0, 0),
+            Pair(0, 0),
+            Pair(0, 0),
+            Pair(0, 0)
+        )
+    )
     ropeBridge2.applyMoves(ropeMoves)
     println("Day 9 part 2 : " + ropeBridge2.numberOfUniqueTailPosition())
 
@@ -119,7 +132,16 @@ fun main() {
     println("Day 10 part 1 : " + result)
     val screen = communicationSystem.draw()
     println("Day 10 part 2 : ")
-    screen.forEach{
+    screen.forEach {
         println(it)
     }
+
+    // Day 11
+    val dataLoader11 = DataLoader("data/day11.txt")
+    var monkeys = dataLoader11.readMonkeys()
+    monkeys.makeNRound(20)
+    println("Day 11 part 1 :" + monkeys.getBusinessLevel())
+    monkeys = dataLoader11.readMonkeys()
+    monkeys.makeNRound(10000)
+    println("Day 11 part 2 :" + monkeys.getBusinessLevel())
 }
